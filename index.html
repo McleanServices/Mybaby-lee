@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#2d5a3d" />
+  <title>For Beautiful</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div class="leaf leaf-1" aria-hidden="true"></div>
+    <div class="leaf leaf-2" aria-hidden="true"></div>
+    <div class="leaf leaf-3" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <p class="couple-names">Lee <span class="couple-heart" aria-hidden="true">♡</span> Ty</p>
+    </header>
+
+  <audio id="bg-music" src="music.mp3" loop preload="auto" playsinline></audio>
+
+    <!-- Step 1: Music intro -->
+    <section class="step is-active" data-step="0" aria-label="A song for Beautiful">
+      <p class="brand">Good Morning Beautiful</p>
+      <h1 class="headline">Turn up your volume to listen</h1>
+      <div class="music-visual" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <button type="button" class="btn btn-next" data-next>Next</button>
+    </section>
+
+    <!-- Step 2: Affirmations -->
+    <section class="step" data-step="1" aria-label="Words of affirmation" hidden>
+      <p class="brand">Babygirl</p>
+      <h1 class="headline">Say these out loud</h1>
+      <p class="support">Tap each one as you say it, Beautiful.</p>
+      <div class="choice-list affirmation-list" role="list" data-affirmations>
+        <button type="button" class="choice affirmation" data-affirm>I am beautiful</button>
+        <button type="button" class="choice affirmation" data-affirm>I am a beautiful person</button>
+        <button type="button" class="choice affirmation" data-affirm>I am worthy of love and kindness</button>
+        <button type="button" class="choice affirmation" data-affirm>I am enough, just as I am</button>
+      </div>
+      <button type="button" class="btn btn-next" data-next disabled>Next</button>
+    </section>
+
+    <!-- Step 3: Message -->
+    <section class="step" data-step="2" aria-label="You are beautiful" hidden>
+      <p class="brand">Baby</p>
+      <h1 class="headline">You are so beautiful</h1>
+      <p class="support">Every time I think of you, the world feels softer almost as soft as you.</p>
+      <button type="button" class="btn btn-next" data-next>Next</button>
+    </section>
+
+    <!-- Step 4: Nap -->
+    <section class="step" data-step="3" aria-label="How was your nap" hidden>
+      <p class="brand">My Baby</p>
+      <h1 class="headline">How was your beauty sleep?</h1>
+      <p class="support">Tell me how you’re feeling, Beautiful.</p>
+      <div class="choice-list" role="listbox" aria-label="Nap feeling" data-choice-group="nap">
+        <button type="button" class="choice" role="option" data-value="Amazing, I feel so rested">Amazing, I feel so rested</button>
+        <button type="button" class="choice" role="option" data-value="Pretty good">Pretty good</button>
+        <button type="button" class="choice" role="option" data-value="Okay, still a little sleepy">Okay, still a little sleepy</button>
+        <button type="button" class="choice" role="option" data-value="Rough… need more cuddles">Rough… need more cuddles</button>
+      </div>
+      <button type="button" class="btn btn-next" data-next disabled>Next</button>
+    </section>
+
+    <!-- Step 5: See you again -->
+    <section class="step" data-step="4" aria-label="When can I see you" hidden>
+      <p class="brand">My Love</p>
+      <h1 class="headline">When can I see you again?</h1>
+      <div class="choice-list" role="listbox" aria-label="When to meet" data-choice-group="when">
+        <button type="button" class="choice" role="option" data-value="Tonight">Tonight</button>
+        <button type="button" class="choice choice-tease" role="option" data-value="Tomorrow night" data-tease>Tomorrow night</button>
+        <button type="button" class="choice choice-tease" role="option" data-value="Friday" data-tease>Friday</button>
+      </div>
+      <div class="closing-note" id="closing-note" hidden>
+        <h2 class="headline" id="closing-headline">Can’t wait to see you tonight, Beautiful</h2>
+        <p class="support" id="closing-support">You’re the sweetest part of my day.</p>
+        <p class="closing-heart" aria-hidden="true">♡</p>
+      </div>
+      <button type="button" class="btn btn-next" data-next disabled>Next</button>
+    </section>
+
+    <!-- Step 6: Message from your lover -->
+    <section class="step" data-step="5" aria-label="Message from your lover" hidden>
+      <h1 class="headline">Message from your lover</h1>
+      <p class="lover-message">Loving you made me understand why love songs exist.</p>
+      <button type="button" class="btn btn-next" id="send-response">Send to my love</button>
+      <p class="support send-status" id="send-status" hidden></p>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
