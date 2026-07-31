@@ -2,7 +2,7 @@
   const steps = Array.from(document.querySelectorAll(".step"));
   const music = document.getElementById("bg-music");
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  const answers = { nap: null, when: null, affirmations: [] };
+  const answers = { nap: null, affirmations: [] };
   let current = 0;
   let musicStarted = false;
   let saved = false;
@@ -44,15 +44,22 @@
       }
     });
     current = index;
+
+    // After the nap step (index 3), switch to red hearts theme
+    const afterNap = index > 3;
+    document.body.classList.toggle("theme-romance", afterNap);
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) {
+      themeMeta.setAttribute("content", afterNap ? "#8b1e2d" : "#2d5a3d");
+    }
   }
 
   async function saveResponse() {
-    if (saved || !answers.when) return { ok: false, message: "Pick a time first." };
+    if (saved) return { ok: false, message: "Already sent." };
     saved = true;
 
     const { error } = await supabase.from("responses").insert({
       nap_feeling: answers.nap,
-      see_again: answers.when,
       affirmations: answers.affirmations,
     });
 
@@ -63,27 +70,6 @@
     }
 
     return { ok: true, message: "Sent  he’ll see it soon ♡" };
-  }
-
-  function renderClosing() {
-    const note = document.getElementById("closing-note");
-    const headline = document.getElementById("closing-headline");
-    const support = document.getElementById("closing-support");
-    const when = answers.when || "soon";
-    const nap = answers.nap || "";
-
-    headline.textContent = `Can't wait to see you ${when.toLowerCase()}, Beautiful`;
-
-    const napNotes = {
-      "Amazing, I feel so rested": "So glad your nap was amazing, you deserve every bit of rest.",
-      "Pretty good": "Pretty good naps for a pretty Beautiful girl.",
-      "Okay, still a little sleepy": "Still sleepy is okay, I'll be gentle with you.",
-      "Rough… need more cuddles": "Cuddles incoming. I've got you, Beautiful.",
-    };
-
-    support.textContent =
-      napNotes[nap] || "You're the sweetest part of my day, Beautiful.";
-    note.hidden = false;
   }
 
   const sendBtn = document.getElementById("send-response");
@@ -134,7 +120,6 @@
         choice.setAttribute("aria-selected", "true");
         answers[key] = choice.getAttribute("data-value");
         if (nextBtn) nextBtn.disabled = false;
-        if (key === "when") renderClosing();
       });
 
       choice.addEventListener("animationend", () => {
